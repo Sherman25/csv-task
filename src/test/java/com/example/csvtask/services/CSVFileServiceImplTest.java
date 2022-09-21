@@ -45,10 +45,32 @@ class CSVFileServiceImplTest {
 
     @Test
     void getCardsFromDbSortedAlphabeticallyTest() {
+        List<Card> cards = buildCardListUnsorted();
+        when(cardRepository.findAll()).thenReturn(cards);
+        List<Card> sortedAlphabetically = fileService
+                .getCardsFromDbSortedAlphabetically();
+        assertNotEquals(cards, sortedAlphabetically);
     }
 
     @Test
     void getCardsFromDbSortedNumericallyTest() {
+        List<Card> cards = buildCardListUnsorted();
+        when(cardRepository.findAll()).thenReturn(cards);
+        List<Card> sortedNumerically= fileService
+                .getCardsFromDbSortedNumerically();
+        assertNotEquals(cards, sortedNumerically);
+    }
+
+    @Test
+    void sortNamesTest() {
+        List<String> names = buildListOfNamesUnsorted();
+        assertNotEquals(names, fileService.sortNames(names));
+    }
+
+    @Test
+    void sortNumbersTest() {
+        List<BigInteger> numbers = buildListOfCardNumbersUnsorted();
+        assertNotEquals(numbers, fileService.sortCardNumbers(numbers));
     }
 
     @SneakyThrows
@@ -67,7 +89,7 @@ class CSVFileServiceImplTest {
                 initFile.getName(), "text/plain", is);
     }
 
-    private List<Card> buildCardList() {
+    private List<Card> buildCardListUnsorted() {
         List<Card> cardList = new ArrayList<>();
         Card card1 = new Card();
         card1.setId(1l);
@@ -75,17 +97,31 @@ class CSVFileServiceImplTest {
         card1.setHolderName("C");
         cardList.add(card1);
         Card card2 = new Card();
-        card1.setId(2l);
-        card1.setCardNumber(BigInteger.valueOf(345));
-        card1.setHolderName("A");
+        card2.setId(2l);
+        card2.setCardNumber(BigInteger.valueOf(345));
+        card2.setHolderName("A");
         cardList.add(card2);
         Card card3 = new Card();
-        card1.setId(3l);
-        card1.setCardNumber(BigInteger.valueOf(213));
-        card1.setHolderName("B");
+        card3.setId(3l);
+        card3.setCardNumber(BigInteger.valueOf(213));
+        card3.setHolderName("B");
         cardList.add(card3);
         return cardList;
     }
 
+    private List<String> buildListOfNamesUnsorted() {
+        List<String> names = new ArrayList<>();
+        names.add("C");
+        names.add("A");
+        names.add("B");
+        return names;
+    }
 
+    private List<BigInteger> buildListOfCardNumbersUnsorted() {
+        List<BigInteger> numbers = new ArrayList<>();
+        numbers.add(BigInteger.valueOf(3));
+        numbers.add(BigInteger.valueOf(1));
+        numbers.add(BigInteger.valueOf(2));
+        return numbers;
+    }
 }

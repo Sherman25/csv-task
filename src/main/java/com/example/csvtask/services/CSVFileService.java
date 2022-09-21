@@ -3,6 +3,7 @@ package com.example.csvtask.services;
 import com.example.csvtask.domain.Card;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -20,5 +21,5 @@ public interface CSVFileService {
     public void validateFile(MultipartFile file);
     public void storeCardsDataToDB(List<Card> cards);
     public List<String> sortNames(List<String> names);
-    public List<Integer> sortCardNumbers(List<Integer> numbers);
+    public List<BigInteger> sortCardNumbers(List<BigInteger> numbers);
 }

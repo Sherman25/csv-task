@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -88,7 +89,7 @@ public class CSVFileServiceImpl implements CSVFileService {
         return sortColumnData(names);
     }
 
-    public List<Integer> sortCardNumbers(List<Integer> numbers) {
+    public List<BigInteger> sortCardNumbers(List<BigInteger> numbers) {
         return sortColumnData(numbers);
     }
 
