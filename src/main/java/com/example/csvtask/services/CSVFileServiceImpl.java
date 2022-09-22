@@ -44,6 +44,7 @@ public class CSVFileServiceImpl implements CSVFileService {
         return cards;
     }
 
+    @Override
     public void storeCardsDataToDB(List<Card> cards) {
         cardRepository.saveAllAndFlush(cards);
     }
@@ -85,10 +86,12 @@ public class CSVFileServiceImpl implements CSVFileService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<String> sortNames(List<String> names) {
         return sortColumnData(names);
     }
 
+    @Override
     public List<BigInteger> sortCardNumbers(List<BigInteger> numbers) {
         return sortColumnData(numbers);
     }
